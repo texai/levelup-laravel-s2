@@ -9,6 +9,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" /> --}}
     <script src="https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/postcss.config.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.10/css/pico.min.css" rel="stylesheet">
+    <style>.hl{background: #ffec07;}</style>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
         <form>
             <div class="grid">
                 <label style="text-align: center; padding-top: 17px;">Buscar por título:</label>
-                <input type="text" id="q" name="q" value="{{$search?$search:''}}">
+                <input type="text" id="q" name="q" value="{{$search}}">
                 <button type="submit">Buscar</button>
                 <div></div>
             </div>
@@ -40,7 +41,12 @@
                         @foreach ($articles as $article)
                             <tr>
                                 <td>{{ $article->id }}</td>
-                                <td>{{ $article->title }}</td>
+                                @if ($search)
+                                    <td>{!! str_ireplace($search, "<span class=hl>$search</span>", $article->title) !!}</td>
+                                @else
+                                    <td>{{ $article->title }}</td>
+                                @endif
+                                
                             </tr>
                         @endforeach
                     </tbody>
