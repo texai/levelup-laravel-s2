@@ -14,7 +14,12 @@
 <body>
     <main class="container">
 
-        <h1>Listado de Artículos</h1>
+        <div class="grid">
+            <h1>Listado de Artículos</h1>
+            <div style="text-align: right">
+                <a href="/solo-admin" role="button" class="outline">Sólo Admin</a>
+            </div>
+        </div>
 
         <form>
             <div class="grid">

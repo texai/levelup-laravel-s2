@@ -6,6 +6,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
+
 
 class Controller extends BaseController
 {
@@ -21,5 +25,19 @@ class Controller extends BaseController
             $articles = Article::all();
         }
         return view('index', compact('articles','search'));
+    }
+
+    public function soloAdmin(Request $request)
+    {
+        // if ($request->user()->role!='admin'){
+        //     abort(403);
+        // }
+        if (! Gate::allows('validar-admin')) {
+            abort(403);
+        }
+
+
+        return view('solo-admin');
+
     }
 }
